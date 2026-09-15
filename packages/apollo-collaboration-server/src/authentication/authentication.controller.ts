@@ -14,6 +14,7 @@ import {
 } from '@nestjs/common'
 import type { Request, Response } from 'express'
 
+import { OidcBaAuthGuard } from '../utils/oidc_ba.guard.js'
 import { GoogleAuthGuard } from '../utils/google.guard.js'
 import { MicrosoftAuthGuard } from '../utils/microsoft.guard.js'
 import { Role } from '../utils/role/role.enum.js'
@@ -59,6 +60,14 @@ export class AuthenticationController {
   @Redirect()
   @UseGuards(MicrosoftAuthGuard)
   async microsoftHandleRedirect(@Req() req: RequestWithUserToken) {
+    return this.authService.handleRedirect(req)
+  }
+
+  // Finish the OIDC popup using Apollo's existing token redirect flow.
+  @Get('oidc_ba')
+  @Redirect()
+  @UseGuards(OidcBaAuthGuard)
+  oidcBaHandleRedirect(@Req() req: RequestWithUserToken) {
     return this.authService.handleRedirect(req)
   }
 

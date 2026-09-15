@@ -30,8 +30,7 @@ SESSION_SECRET=g9fGaRuw06T7hs960Tm7KYyfcFaYEIaG9jfFnVEQ4QyFXmq7
 # SESSION_SECRET_FILE=/run/secrets/session-secret
 
 ##############################################################################
-## To enable users to log in, you need either (or both) Google or Microsoft ##
-## OAuth configured. Without them, only userless guest access is possible.  ##
+## Configure Google, Microsoft, or BioCommons Access for provider login.   ##
 ##############################################################################
 
 # Google client id and secret.
@@ -49,6 +48,17 @@ MICROSOFT_CLIENT_ID=client_id_here
 MICROSOFT_CLIENT_SECRET=client_secret_here
 # Alternatively, can be a path to a file with the client secret
 # MICROSOFT_CLIENT_SECRET_FILE=/run/secrets/microsoft-client-secret
+
+# Optional BioCommons Access OIDC provider; configure all three to enable.
+# OIDC_BA_ISSUER=https://your-oidc-issuer.example.org
+# OIDC_BA_CLIENT_ID=client_id_here
+# Alternatively, use a file instead of the inline client ID.
+# OIDC_BA_CLIENT_ID_FILE=/run/secrets/oidc-ba-client-id
+# OIDC_BA_CLIENT_SECRET=client_secret_here
+# Alternatively, use a file instead of the inline client secret.
+# OIDC_BA_CLIENT_SECRET_FILE=/run/secrets/oidc-ba-client-secret
+# OIDC_BA_DISPLAY_NAME="BioCommons Access"
+# Register <URL>/auth/oidc_ba as the provider callback URL.
 
 ##############
 ## OPTIONAL ##

@@ -1,0 +1,5 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": { "rootDir": ".." },
+  "include": ["oidc_ba.test.ts"],
+}

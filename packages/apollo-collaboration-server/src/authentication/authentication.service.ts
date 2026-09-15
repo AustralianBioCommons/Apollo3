@@ -26,10 +26,12 @@ import { Role } from '../utils/role/role.enum.js'
 import type { Profile as MicrosoftProfile } from '../utils/strategies/microsoft.strategy.js'
 
 export interface RequestWithUserToken extends Request {
-  user: { token: string }
+  user: { token: string; redirectUri?: string }
 }
 
 interface ConfigValues {
+  OIDC_BA_ISSUER?: string
+  OIDC_BA_DISPLAY_NAME: string
   MICROSOFT_CLIENT_ID?: string
   MICROSOFT_CLIENT_ID_FILE?: string
   GOOGLE_CLIENT_ID?: string
@@ -80,10 +82,11 @@ export class AuthenticationService {
       throw new BadRequestException()
     }
 
-    const { redirect_uri } = (
-      req.authInfo as { state: { redirect_uri: string } }
-    ).state
-    const url = new URL(redirect_uri)
+    // OIDC carries the session-bound popup destination on the authenticated user.
+    const redirectUri =
+      req.user.redirectUri ??
+      (req.authInfo as { state: { redirect_uri: string } }).state.redirect_uri
+    const url = new URL(redirectUri)
     const searchParams = new URLSearchParams({ access_token: req.user.token })
     url.search = searchParams.toString()
     return { url: url.toString() }
@@ -135,6 +138,17 @@ export class AuthenticationService {
       loginTypes.push({
         name: 'google',
         message: 'Sign in with Google',
+        needsPopup: true,
+      })
+    }
+    // The generic client button uses this provider name and display label.
+    if (this.configService.get('OIDC_BA_ISSUER', { infer: true })) {
+      const displayName = this.configService.get('OIDC_BA_DISPLAY_NAME', {
+        infer: true,
+      })
+      loginTypes.push({
+        name: 'oidc_ba',
+        message: `Sign in with ${displayName}`,
         needsPopup: true,
       })
     }

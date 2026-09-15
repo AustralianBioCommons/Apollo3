@@ -437,6 +437,7 @@ __metadata:
     mongoose: "npm:^6.12.0"
     mongoose-id-validator: "npm:^0.6.0"
     multer: "npm:^2.0.2"
+    openid-client: "npm:^6.8.4"
     passport: "npm:^0.5.0"
     passport-google-oauth20: "npm:^2.0.0"
     passport-jwt: "npm:^4.0.0"
@@ -463,6 +464,7 @@ __metadata:
     tslib: "npm:^2.3.1"
     tss-react: "npm:^4.6.1"
     typescript: "npm:^5.5.3"
+    undici: "npm:^8.7.0"
   languageName: unknown
   linkType: soft
 
@@ -24397,6 +24399,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jose@npm:^6.2.12":
+  version: 6.2.12
+  resolution: "jose@npm:6.2.12"
+  checksum: 10c0/e8582b946fabcae228819982dda4849908c353e9cb098f02f773635aa0d2f4917f17484c7441b8d526e564013b4cf96951455c94f81d0a39ee765bad44ce293d
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -27230,6 +27239,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"oauth4webapi@npm:^3.8.8":
+  version: 3.8.8
+  resolution: "oauth4webapi@npm:3.8.8"
+  checksum: 10c0/1f7d35ba8d7d5aa9ce9ec5959a4611ed2b5dd7830172b1546749b91dda8c53f7934e669c6f81e912c64e3ae4fc681d4d6ce149b42cc9d17db97162bf8765e028
+  languageName: node
+  linkType: hard
+
 "oauth@npm:0.9.x":
   version: 0.9.15
   resolution: "oauth@npm:0.9.15"
@@ -27486,6 +27502,16 @@ __metadata:
   bin:
     opener: bin/opener-bin.js
   checksum: 10c0/dd56256ab0cf796585617bc28e06e058adf09211781e70b264c76a1dbe16e90f868c974e5bf5309c93469157c7d14b89c35dc53fe7293b0e40b4d2f92073bc79
+  languageName: node
+  linkType: hard
+
+"openid-client@npm:^6.8.4":
+  version: 6.8.8
+  resolution: "openid-client@npm:6.8.8"
+  dependencies:
+    jose: "npm:^6.2.12"
+    oauth4webapi: "npm:^3.8.8"
+  checksum: 10c0/b1d60ca45623c77b8869b5a9725e25309cca20d32823861c5f72f0e9126a3ce43da2a93be964bfe771a39560f356c06adaedb2be29fe1762c4d097f91a4b620e
   languageName: node
   linkType: hard
 

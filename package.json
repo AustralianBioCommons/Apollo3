@@ -15,6 +15,7 @@
     "start:plugin": "yarn workspace @apollo-annotation/jbrowse-plugin-apollo run start",
     "start": "npm-run-all --print-label --parallel start:shared start:server start:plugin",
     "test": "yarn workspaces foreach --all run test:ci",
+    "test:oidc": "tsx --tsconfig packages/apollo-collaboration-server/tsconfig.json --test packages/apollo-collaboration-server/test/oidc_ba.test.ts",
     "postinstall": "husky"
   },
   "devDependencies": {

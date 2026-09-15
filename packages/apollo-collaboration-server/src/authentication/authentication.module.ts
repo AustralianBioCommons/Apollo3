@@ -8,6 +8,13 @@ import { PassportModule } from '@nestjs/passport'
 import { PluginsService } from '../plugins/plugins.service.js'
 import { UsersModule } from '../users/users.module.js'
 import { GoogleStrategy } from '../utils/strategies/google.strategy.js'
+import { OidcBaStrategy } from '../utils/strategies/oidc_ba.strategy.js'
+import {
+  OIDC_BA_CONFIGURATION,
+  OIDC_BA_LOGIN,
+  oidcBaConfigFactory,
+} from '../utils/oidc_ba.config.js'
+import { OidcBaAuthGuard } from '../utils/oidc_ba.guard.js'
 import { JwtStrategy } from '../utils/strategies/jwt.strategy.js'
 import { MicrosoftStrategy } from '../utils/strategies/microsoft.strategy.js'
 
@@ -47,6 +54,15 @@ async function jwtConfigFactory(
   providers: [
     AuthenticationService,
     JwtStrategy,
+    // Discover the optional BioCommons Access provider before registering its strategy.
+    {
+      provide: OIDC_BA_CONFIGURATION,
+      useFactory: oidcBaConfigFactory,
+      inject: [ConfigService],
+    },
+    { provide: OIDC_BA_LOGIN, useExisting: AuthenticationService },
+    OidcBaStrategy,
+    OidcBaAuthGuard,
     GoogleStrategy,
     MicrosoftStrategy,
     PluginsService,

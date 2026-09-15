@@ -26,6 +26,7 @@ import { RefSeqChunksModule } from './refSeqChunks/refSeqChunks.module.js'
 import { RefSeqsModule } from './refSeqs/refSeqs.module.js'
 import { SequenceModule } from './sequence/sequence.module.js'
 import { UsersModule } from './users/users.module.js'
+import { oidcBaValidationSchema } from './utils/oidc_ba.config.js'
 import { JwtAuthGuard } from './utils/jwt-auth.guard.js'
 import { ValidationGuard } from './utils/validation/validation.guards.js'
 
@@ -114,6 +115,9 @@ const validationSchema = Joi.object({
   PLUGIN_URLS_FILE: Joi.string(),
   OAUTH_HTTP_PROXY: Joi.string(),
 })
+  // Merge Joi schemas; this is not Array.concat.
+  // eslint-disable-next-line unicorn/prefer-spread
+  .concat(oidcBaValidationSchema)
   .xor('MONGODB_URI', 'MONGODB_URI_FILE')
   .oxor('GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_ID_FILE')
   .oxor('GOOGLE_CLIENT_SECRET', 'GOOGLE_CLIENT_SECRET_FILE')
